@@ -20,14 +20,13 @@ var config = {
 
 var game = new Phaser.Game(config);
 
-function preload ()
-{
+function preload() {
     //додаю зображення 
     this.load.image('sky', 'assets/sky.png');
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
-    this.load.spritesheet('dude', 
+    this.load.spritesheet('dude',
         'assets/dude.png',
         { frameWidth: 32, frameHeight: 48 }
     );
@@ -35,8 +34,9 @@ function preload ()
 
 var platforms;
 
-function create ()
-{
+
+
+function create() {
     //роблю так, щоб зображення виводились на лайф сервер
     this.add.image(400, 300, 'sky');
     this.add.image(400, 300, 'star');
@@ -50,7 +50,13 @@ function create ()
     platforms.create(750, 220, 'ground');
     //задаю фізику платформам
     platforms = this.physics.add.staticGroup();
+    
     //додаю спрайт персонажа і задаю йому фізику
+    player = this.physics.add.sprite(100, 450, 'dude');
+    player.setBounce(0.2);
+    player.setCollideWorldBounds(true);
+
+    //анімки і керування
     player = this.physics.add.sprite(100, 450, 'dude');
 
 player.setBounce(0.2);
@@ -74,16 +80,9 @@ this.anims.create({
     frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
     frameRate: 10,
     repeat: -1
-    
-    
-
-    
 });
 
-}
-
-this.physics.add.collider(player, platforms); 
-
-function update ()
-{
+cursors = this.input.keyboard.createCursorKeys();
+function update() {
+ 
 }
